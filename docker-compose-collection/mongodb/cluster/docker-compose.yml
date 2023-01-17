@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   mongo1:
@@ -8,16 +8,16 @@ services:
     expose:
       - 27017
     ports:
-      - 30001:27017 
+      - "30001:27017"
     restart: always
     volumes:
-      - ./mongo1_data:/data/db
+      - ./docker_mongo1_data:/data/db
     healthcheck:
       test: mongo --eval 'db.runCommand("ping").ok' localhost:27017/test --quiet
       interval: 10s
       timeout: 5s
       retries: 5
-    command: mongod --replSet product-master-mongo-set
+    command: mongod --replSet product-master-mongo-set --wiredTigerCacheSizeGB 4
   mongo2:
     hostname: mongo2
     container_name: mongo2
@@ -25,16 +25,16 @@ services:
     expose:
       - 27017
     ports:
-      - 30002:27017
+      - "30002:27017"
     restart: always
     volumes:
-      - ./mongo2_data:/data/db
+      - ./docker_mongo2_data:/data/db
     healthcheck:
       test: mongo --eval 'db.runCommand("ping").ok' localhost:27017/test --quiet
       interval: 10s
       timeout: 5s
       retries: 5
-    command: mongod --replSet product-master-mongo-set
+    command: mongod --replSet product-master-mongo-set --wiredTigerCacheSizeGB 4
   mongo3:
     hostname: mongo3
     container_name: mongo3
@@ -42,16 +42,16 @@ services:
     expose:
       - 27017
     ports:
-      - 30003:27017
+      - "30003:27017"
     restart: always
     volumes:
-      - ./mongo3_data:/data/db
+      - ./docker_mongo3_data:/data/db
     healthcheck:
       test: mongo --eval 'db.runCommand("ping").ok' localhost:27017/test --quiet
       interval: 10s
       timeout: 5s
       retries: 5
-    command: mongod --replSet product-master-mongo-set
+    command: mongod --replSet product-master-mongo-set --wiredTigerCacheSizeGB 4
   mongoinit:
     image: mongo:5.0
     restart: "no"
@@ -70,15 +70,18 @@ services:
       "members" : [
         {
           "_id" : 0,
-          "host" : "mongo1:27017"
+          "host" : "mongo1:27017",
+          "priority" : 100
         },
         {
           "_id" : 1,
-          "host" : "mongo2:27017"
+          "host" : "mongo2:27017",
+          "priority" : 0.5
         },
         {
           "_id" : 2,
-          "host" : "mongo3:27017"
+          "host" : "mongo3:27017",
+          "priority" : 0.5
         }
       ]
       };

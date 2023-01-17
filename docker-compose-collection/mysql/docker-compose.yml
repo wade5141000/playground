@@ -6,7 +6,7 @@ services:
     container_name: mysql-8
     restart: always
     volumes:
-      - ./docker-volume:/var/lib/mysql
+      - ./docker_mysql_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - TZ=Asia/Hong_Kong
