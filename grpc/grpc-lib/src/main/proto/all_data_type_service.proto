@@ -1,0 +1,45 @@
+syntax = "proto3";
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+option java_multiple_files = true;
+option java_package = "com.wade";
+
+service AllDataTypeService {
+  rpc Print (AllDataTypeRequest) returns (AllDataTypeResponse);
+}
+
+enum MY_ENUM {
+  MY_ENUM_UNSPECIFIED = 0;
+  MY_ENUM_E1 = 1;
+  MY_ENUM_E2 = 2;
+}
+
+message AllDataTypeRequest {
+  double field1 = 1;
+  float field2 = 2;
+  int32 field3 = 3;
+  int64 field4 = 4;
+  bool field5 = 5;
+  string field6 = 6;
+  bytes field7 = 7;
+  MY_ENUM field8 = 8;
+  repeated MY_ENUM field9 = 9;
+  Inner field10 = 10;
+  AllDataTypeResponse field11 = 11;
+  map<string, Inner> field12 = 12;
+  oneof field13 {
+    int32 one_of1 = 13;
+    string one_of2 = 14;
+    bool one_of3 = 15;
+  }
+  google.protobuf.Any field14 = 16;
+  google.protobuf.Timestamp field15 = 17;
+
+  message Inner {
+    string inner_field1 = 1;
+  }
+}
+
+message AllDataTypeResponse {
+  string greeting = 1;
+}
