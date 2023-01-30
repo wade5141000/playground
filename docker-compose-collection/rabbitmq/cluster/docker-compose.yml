@@ -10,7 +10,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     environment:
-      - RABBITMQ_ERLANG_COOKIE=shoalter
+      - RABBITMQ_ERLANG_COOKIE=my_cookie
     volumes:
       - ./docker_rabbitmq1_data:/var/lib/rabbitmq
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
@@ -25,7 +25,7 @@ services:
       - "5673:5672"
       - "15673:15672"
     environment:
-      - RABBITMQ_ERLANG_COOKIE=shoalter
+      - RABBITMQ_ERLANG_COOKIE=my_cookie
     volumes:
       - ./docker_rabbitmq2_data:/var/lib/rabbitmq
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
@@ -40,7 +40,7 @@ services:
       - "5674:5672"
       - "15674:15672"
     environment:
-      - RABBITMQ_ERLANG_COOKIE=shoalter
+      - RABBITMQ_ERLANG_COOKIE=my_cookie
     volumes:
       - ./docker_rabbitmq3_data:/var/lib/rabbitmq
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf

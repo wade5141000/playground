@@ -8,7 +8,7 @@ services:
     expose:
       - 27017
     ports:
-      - "30001:27017"
+      - "27017:27017"
     restart: always
     volumes:
       - ./docker_mongo1_data:/data/db
@@ -25,7 +25,7 @@ services:
     expose:
       - 27017
     ports:
-      - "30002:27017"
+      - "27018:27017"
     restart: always
     volumes:
       - ./docker_mongo2_data:/data/db
@@ -42,7 +42,7 @@ services:
     expose:
       - 27017
     ports:
-      - "30003:27017"
+      - "27019:27017"
     restart: always
     volumes:
       - ./docker_mongo3_data:/data/db
